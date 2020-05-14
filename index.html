@@ -14,7 +14,7 @@
 
 	<!-- Go to www.addthis.com/dashboard to customize your tools -->
 	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ebbd84ef986ca80"></script>
-	
+
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="눈바디 측정기(WithBody)">
 	<meta property="og:url" content="https://withbody.ga/">
@@ -76,12 +76,19 @@
 		</div>
 		<div class="file-upload-content">
 			<img class="file-upload-image" id="face-image" src="#" alt="your image" />
+			<div id="loading" class="animated bounce">
+				<div class="spinner-border" role="status">
+					<span class="sr-only">Loading...</span>
+				</div>
+				<p class="text-center">AI가 당신의 체지방을 분석중입니다.</p>
+			</div>
 			<p class="result-message" style="font-size: 2rem;"></p>
 			<div id="label-container"></div>
 			<div class="image-title-wrap">
 				<button type="button" onclick="removeUpload()" class="remove-image">사진 교체
 				</button>
 			</div>
+
 			<!-- Go to www.addthis.com/dashboard to customize your tools -->
 			<div class="addthis_inline_share_toolbox"></div>
 
@@ -128,13 +135,18 @@
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				$('.image-upload-wrap').hide();
+				$('#loading').show();
 				$('.file-upload-image').attr('src', e.target.result);
 				$('.file-upload-content').show();
 				$('.image-title').html(input.files[0].name);
-			};
+				$('.result-message').hide();
+			}
 			reader.readAsDataURL(input.files[0]);
 			init().then(function() {
+				//여기다 여기
 				predict();
+				$('#loading').hide();
+				$('.result-message').show();
 			});
 		} else {
 			removeUpload();
@@ -213,11 +225,11 @@
 			resultMessage = "판별하기 어렵습니다. 사진을 다시 찍어주세요."
 		}
 		$('.result-message').html(resultMessage);
-		// 		for (let i = 0; i < maxPredictions; i++) {
-		// 			const classPrediction =
-		// 				prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-		// 			labelContainer.childNodes[i].innerHTML = classPrediction;
-		// 		}
+		//       for (let i = 0; i < maxPredictions; i++) {
+		//          const classPrediction =
+		//             prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+		//          labelContainer.childNodes[i].innerHTML = classPrediction;
+		//       }
 	}
 </script>
 
