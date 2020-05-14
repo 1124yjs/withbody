@@ -41,7 +41,7 @@
 					<a class="nav-link" href="#">Features</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Pricing</a>
+					<a class="nav-link" href="#">조코딩 최고</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -143,7 +143,6 @@
 			}
 			reader.readAsDataURL(input.files[0]);
 			init().then(function() {
-				//여기다 여기
 				predict();
 				$('#loading').hide();
 				$('.result-message').show();
@@ -192,39 +191,29 @@
 		// predict can take in an image, video or canvas html element
 		var image = document.getElementById("face-image");
 		const prediction = await model.predict(image, false);
+		var result_fat = 0;
 		prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability)); //오름차순 정렬
-		console.log(prediction[0].className);
-		var resultMessage;
-		if (prediction[0] != prediction[1]) {
-			switch (prediction[0].className) {
-				case "3~4%":
-					resultMessage = "당신의 체지방은 3%입니다."
-					break;
-				case "5~7%":
-					resultMessage = "당신의 체지방은 6%입니다."
-					break;
-				case "10~12%":
-					resultMessage = "당신의 체지방은 11%입니다."
-					break;
-				case "14~16%":
-					resultMessage = "당신의 체지방은 15%입니다."
-					break;
-				case "18~20%":
-					resultMessage = "당신의 체지방은 19%입니다."
-					break;
-				case "26~28%":
-					resultMessage = "당신의 체지방은 27%입니다."
-					break;
-				case "30%~":
-					resultMessage = "당신의 체지방은 30퍼 이상입니다. 운동하러 가세요!"
-					break;
-				default:
-					resultMessage = "판별하기 어렵습니다. 사진을 다시 찍어주세요."
+		
+		for (let i = 0; i < 7; i++) {
+			if (prediction[i].className == "3~4%") {
+				result_fat += prediction[i].probability * 3.5;
+			} else if (prediction[i].className == "5~7%") {
+				result_fat += prediction[i].probability * 6;
+			} else if (prediction[i].className == "10~12%") {
+				result_fat += prediction[i].probability * 11;
+			} else if (prediction[i].className == "14~16%") {
+				result_fat += prediction[i].probability * 15
+			} else if (prediction[i].className == "18~20%") {
+				result_fat += prediction[i].probability * 19;
+			} else if (prediction[i].className == "26~28%") {
+				result_fat += prediction[i].probability * 27;
+			} else if (prediction[i].className == "30%~") {
+				result_fat += prediction[i].probability * 35;
 			}
-		} else {
-			resultMessage = "판별하기 어렵습니다. 사진을 다시 찍어주세요."
 		}
-		$('.result-message').html(resultMessage);
+		$('.result-message').html("당신의 체지방은 " + result_fat.toFixed(2) + "% 입니다.");
+		
+		// $('.result-message').html(resultMessage);
 		//       for (let i = 0; i < maxPredictions; i++) {
 		//          const classPrediction =
 		//             prediction[i].className + ": " + prediction[i].probability.toFixed(2);
