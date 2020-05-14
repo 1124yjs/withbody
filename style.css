@@ -169,6 +169,12 @@ body {
 	font-size: 1.2rem;
 }
 
+.copy-right{
+	text-align: center;
+	color: #FFFFFF;
+	font-size: 0.5rem;
+}
+
 /* On screens that are 600px or less, set the background color to olive */
 @media screen and (max-width: 600px) {
  	html {
@@ -182,6 +188,9 @@ body {
 	}
 	.space{
 		height: 9rem;
+	}
+	.copy-right{
+		font-size: 0.7rem;
 	}
 }
 

@@ -28,6 +28,9 @@
 		<a class="navbar-brand" href="#">
 			눈바디 측정기
 		</a>
+		
+		<h7 class="copy-right">© WithUs 2020. All Rights Reserved.</h7>
+		
 		<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -102,6 +105,7 @@
 
 	<!-- <div id="webcam-container"></div> -->
 	<div id="disqus_thread"></div>
+
 	<script>
 		/**
 		 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -176,7 +180,7 @@
 	// More API functions here:
 	// https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 	// the link to your model provided by Teachable Machine export panel
-	const URL = "https://teachablemachine.withgoogle.com/models/JmH17e6CC/";
+	const URL = "https://teachablemachine.withgoogle.com/models/YRUiLr7Vq/";
 	let model, webcam, labelContainer, maxPredictions;
 	// Load the image model and setup the webcam
 	async function init() {
@@ -214,29 +218,25 @@
 			} else if (prediction[i].className == "26~28%") {
 				result_fat += prediction[i].probability * 27;
 			} else if (prediction[i].className == "30%~") {
-				result_fat += prediction[i].probability * 35;
+				result_fat += prediction[i].probability * 30;
 			}
 		}
-		
 		$('.result-message').html("당신의 체지방은 " + result_fat.toFixed(2) + "% 입니다.");
-		
-		if(result_fat>30){
-			$('.plus-message').html("건강상에도 문제가 생기는 체지방률");	
-		}else if(result_fat>25){
+		if (result_fat > 30) {
+			$('.plus-message').html("건강상에도 문제가 생기는 체지방률");
+		} else if (result_fat > 25) {
 			$('.plus-message').html("배가 나오고 몸이 무거워지는 통통해보이는 체지방률");
-		}else if(result_fat>18){
+		} else if (result_fat > 18) {
 			$('.plus-message').html("과하지도 부족하지도 않은 평균 체지방률");
-		}else if(result_fat>13){
-			$('.plus-message').html("일반인들이 도전하는 식스팩이 살짝 보이는 체지방률");	
-		}else if(result_fat>10){
-			$('.plus-message').html("여자들이 좋아하는 남자 모델 체지방률");	
-		}else if(result_fat>5){
-			$('.plus-message').html("일반적으로 피트니스모델들이 유지하는 체지방률");	
-		}else if(result_fat>0){
+		} else if (result_fat > 13) {
+			$('.plus-message').html("일반인들이 도전하는 식스팩이 살짝 보이는 체지방률");
+		} else if (result_fat > 10) {
+			$('.plus-message').html("여자들이 좋아하는 남자 모델 체지방률");
+		} else if (result_fat > 5) {
+			$('.plus-message').html("일반적으로 피트니스모델들이 유지하는 체지방률");
+		} else if (result_fat > 0) {
 			$('.plus-message').html("사람맞나요?");
 		}
-		
-		
 		// $('.result-message').html(resultMessage);
 		//       for (let i = 0; i < maxPredictions; i++) {
 		//          const classPrediction =
