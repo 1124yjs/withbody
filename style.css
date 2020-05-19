@@ -249,48 +249,13 @@ body {
 .text-center{
 	font-family: S-CoreDream-8Heavy;
 	color: #ffffff;
+	font-size: 1.5rem;
 }
 
 .share{
 	font-family: S-CoreDream-8Heavy;
 	color: #ffffff;
 }
-
-.btn{
-	display: block;
-	width: 200px;
-	height: 50px;
-	background: #4ac4f3;
-	text-decoration: none;
-	text-align: center;
-	line-height: 50px;
-	color: #ffffff;
-	border-radius: 50px;
-}
-
-.popup{
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	z-index: 5;
-	transform: translate(-50%, -50%);
-	width: 500px;
-	height: 500px;
-	box-shadow: 0 0 10px rgba(0,0,0,0.5);
-	background: #ffffff;
-	border-radius: 5px;
-	text-align: right;
-	padding: 20px;
-	box-sizing: border-box;
-	transition: all 0.5s;
-}
-
-.popup a{
-	color: grey;
-	text-decoration: none;
-}
-
-
 
 @font-face { font-family: 'S-CoreDream-8Heavy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff'); font-weight: normal; font-style: normal; }
 
