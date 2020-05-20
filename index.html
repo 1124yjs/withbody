@@ -98,6 +98,13 @@
 	</section>
 
 	<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<div class = "specimen">
+		<div class = "specimen_in">
+			<img src="img/body1.png" class="body1" style="width: 20%;">
+			<img src="img/body2.png" class="body2" style="width: 20%;">
+			<img src="img/body3.png" class="body3" style="width: 20%;">
+		</div>
+	</div>
 	<div class="container file-upload">
 		<div class="image-upload-wrap" style="width: 100%; margin: 0 auto;">
 			<input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
@@ -265,41 +272,33 @@
 		// predict can take in an image, video or canvas html element
 		var image = document.getElementById("face-image");
 		const prediction = await model.predict(image, false);
-		var result_fat = 0;
+		var result_fat = "";
 		prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability)); //오름차순 정렬
-		for (let i = 0; i < 7; i++) {
-			if (prediction[i].className == "3~4%") {
-				result_fat += prediction[i].probability * 3.5;
-			} else if (prediction[i].className == "5~7%") {
-				result_fat += prediction[i].probability * 6;
-			} else if (prediction[i].className == "10~12%") {
-				result_fat += prediction[i].probability * 11;
-			} else if (prediction[i].className == "14~16%") {
-				result_fat += prediction[i].probability * 15
-			} else if (prediction[i].className == "18~20%") {
-				result_fat += prediction[i].probability * 19;
-			} else if (prediction[i].className == "26~28%") {
-				result_fat += prediction[i].probability * 27;
-			} else if (prediction[i].className == "30%~") {
-				result_fat += prediction[i].probability * 30;
+
+			if (prediction[0].className == "3~4%") {
+				result_fat = prediction[0].className;
+				$('.plus-message').html("사람맞나요?");
+			} else if (prediction[0].className == "5~7%") {
+				result_fat = prediction[0].className;
+				$('.plus-message').html("일반적으로 피트니스모델들이 유지하는 체지방률");
+			} else if (prediction[0].className == "10~12%") {
+				result_fat = prediction[0].className;
+				$('.plus-message').html("여자들이 좋아하는 남자모델 체지방률");
+			} else if (prediction[0].className == "14~16%") {
+				result_fat = prediction[0].className;
+				$('.plus-message').html("일반인들이 도전하는 식스팩이 보이는 체지방률");
+			} else if (prediction[0].className == "18~20%") {
+				result_fat = prediction[0].className;
+				$('.plus-message').html("과하지도 부족하지도 않은 평균 체지방률");
+			} else if (prediction[0].className == "26~28%") {
+				result_fat = prediction[0].className;
+				$('.plus-message').html("배가 나오고 몸이 통통해보이는 체지방률");
+			} else if (prediction[0].className == "30%~") {
+				result_fat = "30% 이상"
+				$('.plus-message').html("건강상에도 문제가 생기는 체지방률");
 			}
-		}
-		$('.result-message').html("당신의 체지방은 " + result_fat.toFixed(2) + "% 입니다.");
-		if (result_fat > 30) {
-			$('.plus-message').html("건강상에도 문제가 생기는 체지방률");
-		} else if (result_fat > 25) {
-			$('.plus-message').html("배가 나오고 몸이 무거워지는 통통해보이는 체지방률");
-		} else if (result_fat > 18) {
-			$('.plus-message').html("과하지도 부족하지도 않은 평균 체지방률");
-		} else if (result_fat > 13) {
-			$('.plus-message').html("일반인들이 도전하는 식스팩이 살짝 보이는 체지방률");
-		} else if (result_fat > 10) {
-			$('.plus-message').html("여자들이 좋아하는 남자 모델 체지방률");
-		} else if (result_fat > 5) {
-			$('.plus-message').html("일반적으로 피트니스모델들이 유지하는 체지방률");
-		} else if (result_fat > 0) {
-			$('.plus-message').html("사람맞나요?");
-		}
+
+		$('.result-message').html("당신의 체지방은 " + result_fat + " 입니다.");
 		// $('.result-message').html(resultMessage);
 		//       for (let i = 0; i < maxPredictions; i++) {
 		//          const classPrediction =
@@ -308,8 +307,6 @@
 		//       }
 	}
 </script>
-
-</body>
 <!-- Copyright (c) 2020 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
