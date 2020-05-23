@@ -98,8 +98,8 @@
 	</section>
 
 	<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<div class = "specimen">
-		<div class = "specimen_in">
+	<div class="specimen">
+		<div class="specimen_in">
 			<img src="img/body1.png" class="body1" style="width: 20%;">
 			<img src="img/body2.png" class="body2" style="width: 20%;">
 			<img src="img/body3.png" class="body3" style="width: 20%;">
@@ -126,6 +126,11 @@
 				<br>
 				<br>
 				<p class="text-center">AI가 당신의 체지방을 분석중입니다.</p>
+				<br>
+				<ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-uvhf34jey1iu" data-ad-width="250" data-ad-height="250"></ins>
+				<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+				<br>
+				<br>
 			</div>
 			<p class="mt-3 result-message" style="font-size: 2rem;"></p>
 			<p class="mt-3 plus-message" style="font-size: 1.4rem;"></p>
@@ -152,8 +157,24 @@
 			<b>( There may be errors depending on the lighting. )</b>
 		</h3>
 	</div>
+	
+	<ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-s12vcad2mq0n" data-ad-width="320" data-ad-height="100"></ins>
+	<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+
+	<script src="https://ads-partners.coupang.com/g.js"></script>
+	<script>
+		new PartnersCoupang.G({
+			width: '100%',
+			id: 238179
+		});
+	</script>
 
 	<div id="disqus_thread"></div>
+
+	<div align="center">
+		<ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-1h82k3vzm215t" data-ad-width="250" data-ad-height="250"></ins>
+		<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+	</div>
 
 	<script>
 		/**
@@ -253,30 +274,28 @@
 		const prediction = await model.predict(image, false);
 		var result_fat = "";
 		prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability)); //오름차순 정렬
-
-			if (prediction[0].className == "3~4%") {
-				result_fat = prediction[0].className;
-				$('.plus-message').html("사람맞나요?");
-			} else if (prediction[0].className == "5~7%") {
-				result_fat = prediction[0].className;
-				$('.plus-message').html("일반적으로 피트니스모델들이 유지하는 체지방률");
-			} else if (prediction[0].className == "10~12%") {
-				result_fat = prediction[0].className;
-				$('.plus-message').html("여자들이 좋아하는 남자모델 체지방률");
-			} else if (prediction[0].className == "14~16%") {
-				result_fat = prediction[0].className;
-				$('.plus-message').html("일반인들이 도전하는 식스팩이 보이는 체지방률");
-			} else if (prediction[0].className == "18~20%") {
-				result_fat = prediction[0].className;
-				$('.plus-message').html("과하지도 부족하지도 않은 평균 체지방률");
-			} else if (prediction[0].className == "26~28%") {
-				result_fat = prediction[0].className;
-				$('.plus-message').html("배가 나오고 몸이 통통해보이는 체지방률");
-			} else if (prediction[0].className == "30%~") {
-				result_fat = "30% 이상"
-				$('.plus-message').html("건강상에도 문제가 생기는 체지방률");
-			}
-
+		if (prediction[0].className == "3~4%") {
+			result_fat = prediction[0].className;
+			$('.plus-message').html("사람맞나요?");
+		} else if (prediction[0].className == "5~7%") {
+			result_fat = prediction[0].className;
+			$('.plus-message').html("일반적으로 피트니스모델들이 유지하는 체지방률");
+		} else if (prediction[0].className == "10~12%") {
+			result_fat = prediction[0].className;
+			$('.plus-message').html("여자들이 좋아하는 남자모델 체지방률");
+		} else if (prediction[0].className == "14~16%") {
+			result_fat = prediction[0].className;
+			$('.plus-message').html("일반인들이 도전하는 식스팩이 보이는 체지방률");
+		} else if (prediction[0].className == "18~20%") {
+			result_fat = prediction[0].className;
+			$('.plus-message').html("과하지도 부족하지도 않은 평균 체지방률");
+		} else if (prediction[0].className == "26~28%") {
+			result_fat = prediction[0].className;
+			$('.plus-message').html("배가 나오고 몸이 통통해보이는 체지방률");
+		} else if (prediction[0].className == "30%~") {
+			result_fat = "30% 이상"
+			$('.plus-message').html("건강상에도 문제가 생기는 체지방률");
+		}
 		$('.result-message').html("당신의 체지방은 " + result_fat + " 입니다.");
 		// $('.result-message').html(resultMessage);
 		//       for (let i = 0; i < maxPredictions; i++) {
@@ -294,4 +313,5 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  -->
+
 </html>
